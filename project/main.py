@@ -7,6 +7,8 @@ main = Blueprint('main', __name__)
 
 #making random change another change another one
 
+#making random change another change another one
+
 #Show all restaurants
 @main.route('/')
 @main.route('/restaurant/')
