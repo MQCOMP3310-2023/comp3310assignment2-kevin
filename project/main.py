@@ -5,6 +5,8 @@ from . import db
 
 main = Blueprint('main', __name__)
 
+#making random change
+
 #Show all restaurants
 @main.route('/')
 @main.route('/restaurant/')
