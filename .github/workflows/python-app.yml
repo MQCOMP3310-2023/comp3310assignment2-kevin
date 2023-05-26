@@ -30,6 +30,7 @@ jobs:
       - name: Lint with bandit
         run: |
           # stop the build if there are these bandit linting errors
+          # ref: https://bandit.readthedocs.io/en/latest/plugins/index.html
           # B101 -> exec_used
           # B102 -> hardcoded_password_string
           # B103 -> set_bad_file_permissions
