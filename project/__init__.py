@@ -15,7 +15,7 @@ def create_app():
 
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///restaurantmenu.db'
 
     db.init_app(app)
