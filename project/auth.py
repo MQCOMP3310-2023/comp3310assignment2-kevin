@@ -38,6 +38,7 @@ def signup():
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
+    # Email Checker Function to change email into safe email
     def email_checker(email):
         username_list = list(email.strip())
         safe_email_array = []
