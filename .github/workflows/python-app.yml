@@ -38,8 +38,6 @@ jobs:
           # B501 -> request_with_no_cert_validation
           # B602 -> subprocess_popen_with_shell_equals_true
           bandit -r . -s B101,B102,B103,B110,B501,B602
-      - name: Push to prod/main
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "prod/main"
+      - name: Test with pytest
+        run: |
+          bandit -r . -x test_*.py continue-on-error: true
