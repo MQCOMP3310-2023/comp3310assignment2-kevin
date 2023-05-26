@@ -38,6 +38,5 @@ jobs:
           # B501 -> request_with_no_cert_validation
           # B602 -> subprocess_popen_with_shell_equals_true
           bandit -r . -s B101,B102,B103,B110,B501,B602
-      - name: Bandit security check
-        continue-on-error: true
-        run: bandit -r . -x test_*.py
+      - name: Run tests
+        run: pytest tests/
