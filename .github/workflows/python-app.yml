@@ -39,5 +39,6 @@ jobs:
           # B602 -> subprocess_popen_with_shell_equals_true
           bandit -r . -s B101,B102,B103,B110,B501,B602
       - name: Push to prod/main
+        run: |
           git checkout -b prod/main
           git push origin prod/main
