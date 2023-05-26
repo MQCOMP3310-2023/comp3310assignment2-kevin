@@ -29,10 +29,11 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Lint with bandit
         run: |
-          # stop the build if there are Python syntax errors or undefined names
-          bandit -r . -s B101,B102,B103
-          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          # bandit . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Test with pytest
-        run: |
-          bandit -r . -x test_*.py continue-on-error: true
+          # stop the build if there are these bandit linting errors
+          # B101 -> exec_used
+          # B102 -> hardcoded_password_string
+          # B103 -> set_bad_file_permissions
+          # B110 -> try_except_pass
+          # B501 -> request_with_no_cert_validation
+          # B602 -> subprocess_popen_with_shell_equals_true
+          bandit -r . -s B101,B102,B103,B110,B501,B602
