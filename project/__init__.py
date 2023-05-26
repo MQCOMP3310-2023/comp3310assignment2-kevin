@@ -9,6 +9,7 @@ db = SQLAlchemy()
 
 def create_app():
     
+    # Fixed CWE-259 hardcoded password vulnerability by using .env file - can provide .env file if needed
     load_dotenv()
 
     app = Flask(__name__)
