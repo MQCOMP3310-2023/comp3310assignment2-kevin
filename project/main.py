@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import Restaurant, MenuItem
 from sqlalchemy import asc
 from . import db
+from flask_login import login_required, current_user
 
 main = Blueprint('main', __name__)
 
@@ -108,3 +109,8 @@ def deleteMenuItem(restaurant_id,menu_id):
     else:
         return render_template('deleteMenuItem.html', item = itemToDelete)
 
+#Show profile
+@main.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html', name=current_user.name)
