@@ -19,11 +19,11 @@ def login_post():
     remember = True if request.form.get('remember') else False
 
     user = User.query.filter_by(email=email).first()
-    hashedpassword = generate_password_hash(password, method="sha256")
+    hashed_password = generate_password_hash(password, method="sha256")
 
     # check if the user actually exists
     # take the user-supplied password and compare it with the stored password
-    if not user or not check_password_hash(hashedpassword, password):
+    if not user or not check_password_hash(hashed_password, password):
         flash('Please check your login details and try again.')
         current_app.logger.warning("User login failed")
         return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
@@ -89,9 +89,9 @@ def signup_post():
         current_app.logger.debug("User email already exists")
         return redirect(url_for('auth.signup'))
 
-    hashedpassword = generate_password_hash(password, method="sha256")
+    hashed_password = generate_password_hash(password, method="sha256")
     # create a new user with the form data. TODO: Hash the password so the plaintext version isn't saved.
-    new_user = User(email=email, name=name, password=hashedpassword)
+    new_user = User(email=email, name=name, password=hashed_password)
 
     # add the new user to the database
     db.session.add(new_user)
