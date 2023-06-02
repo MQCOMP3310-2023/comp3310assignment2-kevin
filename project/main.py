@@ -8,13 +8,13 @@ main = Blueprint('main', __name__)
 #Show all restaurants
 @main.route('/')
 @main.route('/restaurant/')
-def showRestaurants():
+def show_restaurants():
   restaurants = db.session.query(Restaurant).order_by(asc(Restaurant.name))
   return render_template('restaurants.html', restaurants = restaurants)
 
 #Create a new restaurant
 @main.route('/restaurant/new/', methods=['GET','POST'])
-def newRestaurant():
+def new_restaurant():
   if request.method == 'POST':
       newRestaurant = Restaurant(name = request.form['name'])
       db.session.add(newRestaurant)
@@ -26,7 +26,7 @@ def newRestaurant():
 
 #Edit a restaurant
 @main.route('/restaurant/<int:restaurant_id>/edit/', methods = ['GET', 'POST'])
-def editRestaurant(restaurant_id):
+def edit_restaurant(restaurant_id):
   editedRestaurant = db.session.query(Restaurant).filter_by(id = restaurant_id).one()
   if request.method == 'POST':
       if request.form['name']:
@@ -39,7 +39,7 @@ def editRestaurant(restaurant_id):
 
 #Delete a restaurant
 @main.route('/restaurant/<int:restaurant_id>/delete/', methods = ['GET','POST'])
-def deleteRestaurant(restaurant_id):
+def delete_restaurant(restaurant_id):
   restaurantToDelete = db.session.query(Restaurant).filter_by(id = restaurant_id).one()
   if request.method == 'POST':
     db.session.delete(restaurantToDelete)
@@ -52,7 +52,7 @@ def deleteRestaurant(restaurant_id):
 #Show a restaurant menu
 @main.route('/restaurant/<int:restaurant_id>/')
 @main.route('/restaurant/<int:restaurant_id>/menu/')
-def showMenu(restaurant_id):
+def show_menu(restaurant_id):
     restaurant = db.session.query(Restaurant).filter_by(id = restaurant_id).one()
     items = db.session.query(MenuItem).filter_by(restaurant_id = restaurant_id).all()
     return render_template('menu.html', items = items, restaurant = restaurant)
@@ -61,7 +61,7 @@ def showMenu(restaurant_id):
 
 #Create a new menu item
 @main.route('/restaurant/<int:restaurant_id>/menu/new/',methods=['GET','POST'])
-def newMenuItem(restaurant_id):
+def new_menu_item(restaurant_id):
   restaurant = db.session.query(Restaurant).filter_by(id = restaurant_id).one()
   if request.method == 'POST':
       newItem = MenuItem(name = request.form['name'], description = request.form['description'], price = request.form['price'], course = request.form['course'], restaurant_id = restaurant_id)
@@ -74,7 +74,7 @@ def newMenuItem(restaurant_id):
 
 #Edit a menu item
 @main.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit', methods=['GET','POST'])
-def editMenuItem(restaurant_id, menu_id):
+def edit_menu_item(restaurant_id, menu_id):
 
     editedItem = db.session.query(MenuItem).filter_by(id = menu_id).one()
     restaurant = db.session.query(Restaurant).filter_by(id = restaurant_id).one()
@@ -97,7 +97,7 @@ def editMenuItem(restaurant_id, menu_id):
 
 #Delete a menu item
 @main.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/delete', methods = ['GET','POST'])
-def deleteMenuItem(restaurant_id,menu_id):
+def delete_menu_item(restaurant_id,menu_id):
     restaurant = db.session.query(Restaurant).filter_by(id = restaurant_id).one()
     itemToDelete = db.session.query(MenuItem).filter_by(id = menu_id).one() 
     if request.method == 'POST':
