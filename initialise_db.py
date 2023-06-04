@@ -1,12 +1,11 @@
 from project import db, create_app, models
 from project.models import Restaurant, MenuItem
 
-def populate_db():
+def populate_db():    
+
     #Menu for UrbanBurger
     restaurant1 = Restaurant(name = "Urban Burger")
-
     session = db.session()
-    
     session.add(restaurant1)
     session.commit()
     

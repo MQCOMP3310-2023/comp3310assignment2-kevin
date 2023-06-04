@@ -4,6 +4,9 @@ from flask_login import UserMixin
 class Restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
+    # link = db.Column(db.String(256))
+
+
 
     @property
     def serialize(self):
@@ -11,6 +14,8 @@ class Restaurant(db.Model):
        return {
            'name'         : self.name,
            'id'           : self.id,
+        #    'link'         : self.link,
+
        }
  
 class MenuItem(db.Model):
@@ -20,7 +25,7 @@ class MenuItem(db.Model):
     price = db.Column(db.String(8))
     course = db.Column(db.String(250))
     restaurant_id = db.Column(db.Integer,db.ForeignKey('restaurant.id'))
-    restaurant = db.    relationship(Restaurant)
+    restaurant = db.relationship(Restaurant)
 
     @property
     def serialize(self):
