@@ -3,6 +3,11 @@ from .models import Restaurant, MenuItem
 from sqlalchemy import asc
 from . import db
 from flask_login import login_required, current_user
+from flask import Flask, request, redirect
+from project import db, create_app, models
+from project.models import Restaurant, MenuItem
+
+
 
 main = Blueprint('main', __name__)
 
